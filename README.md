@@ -1,4 +1,31 @@
-# state-machine
+# Quarkus State Machine
+This project is a fun experiment in creating a state machine for Quarkus applications. Currently, there isn't a readily available state machine implementation specifically tailored for Quarkus, so I decided to create one. I plan to push this to Maven Central soon for wider use.
+
+## How to Use
+Extend the StateMachine class: Start by extending the StateMachine class and provide the following parameters:
+
+1. ActionTypeEnum class
+2. StateEnumClass
+3. Entity class for which these states and actions are applicable.
+Define Rules: In your Quarkus application, either add the rules for the states in the Main Class (using addRule()) or implement the addRulesOnStartUp method and annotate it with @Startup.
+
+## Usage:
+
+Check if the current state of the entity is acceptable for the action you want to perform. The functionality provided includes:
+1. Get the final State on completing the action.
+2. Check the validity of the action on current state
+3. Implement the process() function as per your requirement and call the performAction() function provided.
+Integration with State Design Pattern
+I'm using this state machine in conjunction with a state design pattern in my project, considering the complexity of states and aiming for loose coupling.
+
+## Feedback and Contributions
+This project is a work in progress, and I welcome feedback and contributions. Feel free to get in touch with me at abhi.pachpande@gmail.com.
+
+## Disclaimer
+Please note that this code is still in development, and while it's functional, it may not be suitable for production use without thorough testing and refinement.
+
+
+## Quarkus -
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
