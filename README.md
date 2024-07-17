@@ -2,12 +2,18 @@
 This project is a fun experiment in creating a state machine for Quarkus applications. Currently, there isn't a readily available state machine implementation specifically tailored for Quarkus, so I decided to create one. I plan to push this to Maven Central soon for wider use.
 
 ## How to Use
-Extend the StateMachine class: Start by extending the StateMachine class and provide the following parameters:
+Extend the StateMachine class: Start by extending the StateMachine class and provide the entityclass in type parameter
+Then implement the AddRulesOnStartup() method.
 
-1. ActionTypeEnum class
-2. StateEnumClass
-3. Entity class for which these states and actions are applicable.
-Define Rules: In your Quarkus application, either add the rules for the states in the Main Class (using addRule()) or implement the addRulesOnStartUp method and annotate it with @Startup.
+Use the addRule(roles, intitalState, action, handler, finalState) or postProcess(finalState) to add these rules
+
+If you want enhancement over simple state change you can add handler implementation extending StateHandler in the addRule() function above
+
+## FlowChart
+
+## Architecture
+![image](https://github.com/user-attachments/assets/897828f8-cc01-41e8-8c64-15f991d42e3f)
+
 
 ## Usage:
 
