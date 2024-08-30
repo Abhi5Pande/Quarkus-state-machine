@@ -27,7 +27,7 @@ public abstract class StateMachine<ENTITY extends ManagedState> {
     @Inject
     EventBus bus;
 
-    protected Map<String, List<Transition>> mapActionTransitions;
+    protected Map<String,List<Transition>> mapActionTransitions;
     protected Map<String,Map<String, List<String>>> roleBasedActions;
     protected Set<String> postProcessors;
 
@@ -83,7 +83,6 @@ public abstract class StateMachine<ENTITY extends ManagedState> {
     }
 
     public Uni<ENTITY> performAction(ENTITY object, String action) {
-        String initialState = object.getState();
         Transition transition = getTransition(object,action);
         if( !isValidForProcessing(transition)) {
             throw new UnsupportedOperationException("Unsupported Operation");
@@ -109,7 +108,9 @@ public abstract class StateMachine<ENTITY extends ManagedState> {
         return processingUni.onItem().transform(o -> {
             // perform post processing;
             String postProcessorString = createPostProcessingString(o.getState());
-            if(postProcessors.contains(postProcessorString)) bus.publish(postProcessorString,o);
+            if(postProcessors.contains(postProcessorString)) {
+                bus.publish(postProcessorString,o);
+            }
             return o;
         });
 
